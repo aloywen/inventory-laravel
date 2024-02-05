@@ -6,8 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\FiturController;
-use App\Http\Controllers\LoketController;
+use App\Http\Controllers\BarangkeluarController;
+use App\Http\Controllers\BarangmasukController;
 
 
 // Route::get('/', function () {
@@ -15,13 +15,13 @@ use App\Http\Controllers\LoketController;
 // }); 
 
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
 Route::group(['middleware' => 'guest'],function () {
-    Route::get('/auth', [LoginController::class, 'auth']);
+    Route::get('/', [LoginController::class, 'auth']);
     Route::post('/auth', [LoginController::class, 'authenticate'])->name('auth');
-    Route::get('/regist', [LoginController::class, 'regist']);
-    Route::post('/regist', [LoginController::class, 'registPost'])->name('register');
-    Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);
+    // Route::get('/regist', [LoginController::class, 'regist']);
+    // Route::post('/regist', [LoginController::class, 'registPost'])->name('register');
+    // Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);
     
 });
 
@@ -32,7 +32,6 @@ Route::group(['middleware' => 'auth'],function () {
         Route::get('/panel/dashboard','index');
         Route::get('/panel/role', 'role');
         Route::get('/panel/users', 'users');
-        Route::get('/panel/category', 'category');
     });
 
     // role
@@ -49,19 +48,26 @@ Route::group(['middleware' => 'auth'],function () {
         Route::get('/panel/deleteuser/{id}', 'delete')->name('userDelete');
     });
 
-    // Jumlah Loket
-    Route::controller(LoketController::class)->group(function () {
-        Route::get('/panel/loket', 'index')->name('loket');
-        Route::post('/panel/loket', 'store')->name('loketStore');
-        Route::post('/panel/updateloket/{id}', 'update')->name('loketUpdate');
-        Route::get('/panel/deleteloket/{id}', 'delete')->name('loketDelete');
+    // Barang Masuk
+    Route::controller(BarangmasukController::class)->group(function () {
+        Route::get('/panel/barangmasuk', 'index')->name('barangmasuk');
+        Route::post('/panel/barangmasuk', 'store')->name('BmasukStore');
+        Route::post('/panel/updateBmasuk/{id}', 'update')->name('BmasukUpdate');
+        Route::get('/panel/deleteBmasuk/{id}', 'delete')->name('BmasukDelete');
+    });
+    
+    // Barang Keluar
+    Route::controller(BarangkeluarController::class)->group(function () {
+        Route::get('/panel/barangkeluar', 'index')->name('barangkeluar');
+        Route::post('/panel/barangkeluar', 'store')->name('BkeluarStore');
+        Route::post('/panel/updateBkeluar/{id}', 'update')->name('BkeluarUpdate');
+        Route::get('/panel/deleteBkeluar/{id}', 'delete')->name('BkeluarDelete');
     });
 
-    // Pesanan Penjualan
-    Route::controller(PesananJualController::class)->group(function () {
-        Route::post('/panel/po', 'store')->name('poStore');
-        Route::post('/panel/updatpo/{id}', 'update')->name('poUpdate');
-        Route::get('/panel/deletepo/{id}', 'delete')->name('poDelete');
+    // Laporan
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('/panel/laporan', 'index')->name('laporan');
+        Route::post('/panel/printlaporan', 'print')->name('laporanPrint');
     });
 
 

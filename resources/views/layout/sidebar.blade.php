@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="#">Bank Aloha</a>
+                    <a href="#">INVENTORY</a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -62,6 +62,27 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ ($title === 'Barang Masuk' ? 'active' : '') }} ">
+                    <a href="{{ url('/panel/barangkeluar') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Barang Masuk</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{ ($title === 'Barang Keluar' ? 'active' : '') }} ">
+                    <a href="{{ url('/panel/barangkeluar') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-in-left"></i>
+                        <span>Barang Keluar</span>
+                    </a>
+                </li>
+                
+                <li class="sidebar-item {{ ($title === 'Laporan' ? 'active' : '') }} ">
+                    <a href="{{ url('/panel/laporan') }}" class='sidebar-link'>
+                        <i class="bi bi-clipboard2-check-fill"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
+
                 
                 
                 
@@ -74,9 +95,9 @@
                     </a>
                     
                     <ul class="submenu">
-                        <li class="submenu-item {{ ($title === 'Loket' ? 'active' : '') }}">
+                        {{-- <li class="submenu-item {{ ($title === 'Loket' ? 'active' : '') }}">
                             <a href="{{ route('loket') }}" class="submenu-link">Jumlah Loket</a>
-                        </li>
+                        </li> --}}
                         
                         {{-- <li class="submenu-item  ">
                             <a href="#" class="submenu-link">Penjualan</a>
