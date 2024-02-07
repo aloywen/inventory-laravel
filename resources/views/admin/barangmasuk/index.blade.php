@@ -28,8 +28,6 @@
 
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-
-            <h3>Barang Masuk</h3>
             <a href="{{ route('bmasukAdd'); }}"><button type="button" class="btn btn-primary">
                 Tambah Transaksi
             </button></a>

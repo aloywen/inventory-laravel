@@ -20,17 +20,26 @@ class BarangmasukController extends Controller
     public function add()
     {
         $data = [
-            'title' => 'Barang Masuk'
+            'title' => 'Barang Masuk Baru'
         ];
 
         return view('admin.barangmasuk.add', $data);
     }
 
+    public function show(Request $request)
+    {
+        $data = [
+            'title' => 'Edit Barang Masuk'
+        ];
+
+        return view('admin.barangmasuk.edit', $data);
+    }
+
     public function store(Request $request)
     {
         $data = Barangmasuk::create([
-            'nomor_loket' => $request->nomor_loket,
-            'nama_loket' => $request->nama_loket,
+            'no_transaksi' => $request->no_transaksi,
+            'tgl_transaksi' => $request->tgl_transaksi,
         ]);
 
         return redirect()->back()->with('loketStore', 'Loket berhasil ditambah!');
