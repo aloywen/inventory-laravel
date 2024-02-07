@@ -5,23 +5,23 @@
 {{-- TITLE --}}
 <div class="page-title">
 
-    @if (session('loketStore'))
+    @if (session('bmasukStore'))
         <div class="alert alert-success alert-dismissible show fade">
-            {{ session('loketStore') }}
+            {{ session('bmasukStore') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
-    @if (session('loketUpdate'))
+    @if (session('bmasukUpdate'))
         <div class="alert alert-success alert-dismissible show fade">
-            {{ session('loketUpdate') }}
+            {{ session('bmasukUpdate') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
-    @if (session('loketDelete'))
+    @if (session('bmasukDelete'))
         <div class="alert alert-success alert-dismissible show fade">
-            {{ session('loketDelete') }}
+            {{ session('bmasukDelete') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -29,10 +29,10 @@
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
 
-            <h3>Loket</h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+            <h3>Barang Masuk</h3>
+            <a href="{{ route('bmasukAdd'); }}"><button type="button" class="btn btn-primary">
                 Tambah Transaksi
-            </button>
+            </button></a>
 
         </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">
-                Pengaturan Loket
+                Data <?= $title ?>
             </h5>
         </div>
         <div class="card-body">
@@ -63,8 +63,8 @@
                         <td>{{ $u->nama_loket }}</td>
                         <td>
                             <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}">Edit</button>
-                            <a href="{{ route('loketDelete',$u->id) }}">
-                            <button type="submit" class="btn badge bg-danger" onclick="return confirm('yakin dihapus?')">
+                            <a href="{{ route('bmasukDelete',$u->id) }}">
+                                <button type="submit" class="btn badge bg-danger" onclick="return confirm('yakin dihapus?')">
                                     Hapus
                                 </button>
                             </a>
@@ -77,51 +77,12 @@
     </div>
 </section>
 
-    {{-- modal tambah data --}}
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form action="{{ route('loketStore') }}" method="POST">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" id="exampleModalLongTitle">Tambah Data Loket</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nomor_loket">Nomor Loket</label>
-                            <input type="text" id="nomor_loket" class="form-control round" name="nomor_loket" required autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="nama_loket">Nama Loket</label>
-                            <input type="text" id="nama_loket" class="form-control round" name="nama_loket" required autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-
-                        <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 
     {{-- modal edit data --}}
 @foreach ($data as $u)
     <div class="modal fade" id="exampleModalLongEdit{{ $u->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('loketUpdate', $u->id) }}" method="POST">
+            <form action="{{ route('bmasukUpdate', $u->id) }}" method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary">

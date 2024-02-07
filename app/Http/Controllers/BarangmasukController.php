@@ -14,7 +14,16 @@ class BarangmasukController extends Controller
             'data' => Barangmasuk::all()
         ];
 
-        return view('admin.loket', $data);
+        return view('admin.barangmasuk.index', $data);
+    }
+
+    public function add()
+    {
+        $data = [
+            'title' => 'Barang Masuk'
+        ];
+
+        return view('admin.barangmasuk.add', $data);
     }
 
     public function store(Request $request)
