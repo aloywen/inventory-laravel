@@ -41,7 +41,6 @@
             </tr>
 
         `)
-        getTotal()
         });
 
     function getID(element) {

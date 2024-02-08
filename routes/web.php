@@ -17,8 +17,8 @@ use App\Http\Controllers\BarangmasukController;
 
 // Route::get('/', [HomeController::class, 'index']);
 Route::group(['middleware' => 'guest'],function () {
-    Route::get('/', [LoginController::class, 'auth']);
-    Route::post('/auth', [LoginController::class, 'authenticate'])->name('auth');
+    Route::get('/', [LoginController::class, 'auth'])->name('auth');
+    Route::post('/auth', [LoginController::class, 'authenticate']);
     // Route::get('/regist', [LoginController::class, 'regist']);
     // Route::post('/regist', [LoginController::class, 'registPost'])->name('register');
     // Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);

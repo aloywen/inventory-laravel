@@ -29,7 +29,7 @@
                         <table class="table table-hover mt-3" style="">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
+                                    {{-- <th scope="col">No</th> --}}
                                     <th scope="col">Kode Barang</th>
                                     <th scope="col">Nama Barang</th>
                                     <th scope="col">Qty</th>
@@ -38,7 +38,7 @@
                             </thead>
                             <tbody class="isi">
                                 <tr id="row_1" style="height: 20px">
-                                    <td scope="row">1</td>
+                                    {{-- <td scope="row">1</td> --}}
                                     <td><input type="text" class="form-control" id="kode_barang_1" name="kode_barang[]"></td>
                                     <td><input type="text" class="form-control" id="nama_barang_1" name="nama_barang[]"></td>
                                     <td><input type="text" class="form-control" id="qty_1" name="qty[]"></td>
