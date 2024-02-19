@@ -9,18 +9,18 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('bmasukUpdate', $transaksi->no_transaksi) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="row -mt-3">
                             <div class="col-md-7 d-flex flex-wrap gap-3">
                                 <div class="">
                                     <label for="no_transaksi" class="form-label">No. Transaksi</label>
-                                    <input type="text" class="form-control" id="no_transaksi" placeholder="Auto" name="no_transaksi" value="{{ $transaksi->no_transaksi }}" readonly>
+                                    <input type="text" class="form-control bg-secondary text-white" id="no_transaksi" placeholder="Auto" name="no_transaksi" value="{{ $transaksi->no_transaksi }}" readonly>
                                   </div>
                                   <div class="">
                                     <label for="tgl_transaksi" class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi" value="{{ $transaksi->tgl_transaksi }}" readonly>
+                                    <input type="date" class="form-control bg-secondary text-white" id="tgl_transaksi" name="tgl_transaksi" value="{{ $transaksi->tgl_transaksi }}" readonly>
                                   </div>
                                 </div>
                             </div>
@@ -45,23 +45,24 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody class="isi">
+                            <tbody class="isiEdit">
+                                <?php $no = 0; ?>
                                 @foreach ($item_transaksi as $item)
-                                    
-                                <tr id="row_1" style="height: 20px">
+                                
+                                <?php $no++ ?>
+                                <tr id="row_<?= $no ?>" style="height: 20px">
                                     {{-- <td scope="row">1</td> --}}
-                                    <td><input type="text" class="form-control" id="kode_barang_1" name="kode_barang[]" value="{{ $item->kode_barang }}"></td>
-                                    <td><input type="text" class="form-control" id="nama_barang_1" name="nama_barang[]" value="{{ $item->nama_barang }}"></td>
-                                    <td><input type="text" class="form-control" id="qty_1" name="qty[]" value="{{ $item->qty }}"></td>
-                                    <td scope="row"><div id="delete_1" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
+                                    <td><input type="text" class="form-control" id="kode_barang_<?php $no = 1; ?>" name="kode_barang[]" value="{{ $item->kode_barang }}"></td>
+                                    <td><input type="text" class="form-control" id="nama_barang_<?php $no = 1; ?>" name="nama_barang[]" value="{{ $item->nama_barang }}"></td>
+                                    <td><input type="text" class="form-control" id="qty_<?php $no = 1; ?>" name="qty[]" value="{{ $item->qty }}"></td>
+                                    <td scope="row"><div id="delete_<?php $no = 1; ?>" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
                                 </tr>
-
                                 @endforeach
                             </tbody>
                         </table>
 
 
-                        <button class="btn btn-outline-primary px-5" id="addField">+ Item</button>
+                        <button class="btn btn-outline-primary px-5" id="addFieldEdit">+ Item</button>
                         
                         <div class="row mt-5">
                             <div class="col-md-6">

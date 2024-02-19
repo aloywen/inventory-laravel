@@ -40,7 +40,8 @@
                 </tr>
                 
                 `)
-            });
+        });
+
             
             // <td scope="row">${count}</td>
     function getID(element) {
@@ -66,6 +67,29 @@
 
     registerEvents();
     });
+
+    $(document).ready(function() {
+        let kode = document.getElementsByClassName('isiEdit');
+    let o = kode[0]
+    let a = o.querySelectorAll("tr")
+    console.log(a.length);
+
+    let no = a.length
+
+    $("#addFieldEdit").click(function (e) {
+        e.preventDefault()
+        no++
+        $(".isiEdit").append(`
+            <tr id="row_${no}" style="height: 20px">
+                <td><input type="text" class="form-control" id="kode_barang_${no}" name="kode_barang[]"></td>
+                <td><input type="text" class="form-control" id="nama_barang_${no}" name="nama_barang[]"></td>
+                <td><input type="text" class="form-control" id="qty_${no}" name="qty[]"></td>
+                <td scope="row"><div id="delete_${no}" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
+                </tr>
+                
+                `)
+    });
+    })
 </script>
 </body>
 
