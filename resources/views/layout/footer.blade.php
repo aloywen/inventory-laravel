@@ -33,16 +33,16 @@
         count++
         $(".isi").append(`
             <tr id="row_${count}" style="height: 20px">
-                <td scope="row">${count}</td>
                 <td><input type="text" class="form-control" id="kode_barang_${count}" name="kode_barang[]"></td>
                 <td><input type="text" class="form-control" id="nama_barang_${count}" name="nama_barang[]"></td>
                 <td><input type="text" class="form-control" id="qty_${count}" name="qty[]"></td>
                 <td scope="row"><div id="delete_${count}" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
-            </tr>
-
-        `)
-        });
-
+                </tr>
+                
+                `)
+            });
+            
+            // <td scope="row">${count}</td>
     function getID(element) {
       var id, adArr;
       id = element.attr('id')

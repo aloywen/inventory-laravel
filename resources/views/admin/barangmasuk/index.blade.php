@@ -48,8 +48,9 @@
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
-                        <th>Nomor Loket</th>
-                        <th>Nama Loket</th>
+                        <th>Nomor Transaksi</th>
+                        <th>Nama Supplier</th>
+                        <th>Tanggal Transaksi</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -57,10 +58,18 @@
                     <?php $no = 1 ?>
                     @foreach ($data as $u)
                     <tr>
-                        <td>{{ $u->nomor_loket }}</td>
-                        <td>{{ $u->nama_loket }}</td>
+                        <td>{{ $u->no_transaksi }}</td>
+                        <td>{{ $u->kode_supplier }}</td>
+                        <td>{{ $u->tgl_transaksi }}</td>
                         <td>
-                            <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}">Edit</button>
+                            <?php
+                                $no_trans = str_replace('/', '', $u->no_transaksi);
+                                ?>
+                            <a href="{{ route('bmasukEdit',$no_trans) }}">
+                                <button class="btn badge bg-warning">
+                                    Lihat
+                                </button>
+                            </a>
                             <a href="{{ route('bmasukDelete',$u->id) }}">
                                 <button type="submit" class="btn badge bg-danger" onclick="return confirm('yakin dihapus?')">
                                     Hapus
@@ -76,46 +85,5 @@
 </section>
 
 
-    {{-- modal edit data --}}
-@foreach ($data as $u)
-    <div class="modal fade" id="exampleModalLongEdit{{ $u->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form action="{{ route('bmasukUpdate', $u->id) }}" method="POST">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white" id="exampleModalLongTitle">Edit Data Loket</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nomor_loket">Nomor Loket</label>
-                            <input type="text" id="nomor_loket" value="{{ $u->nomor_loket }}" class="form-control round" name="nomor_loket" required autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="nama_loket">Nama Loket</label>
-                            <input type="text" id="nama_loket" value="{{ $u->nama_loket }}" class="form-control round" name="nama_loket" required autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary"
-                            data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-
-                        <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-@endforeach
 
 @endsection

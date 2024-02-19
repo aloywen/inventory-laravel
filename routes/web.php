@@ -17,8 +17,8 @@ use App\Http\Controllers\BarangmasukController;
 
 // Route::get('/', [HomeController::class, 'index']);
 Route::group(['middleware' => 'guest'],function () {
-    Route::get('/', [LoginController::class, 'auth'])->name('auth');
-    Route::post('/auth', [LoginController::class, 'authenticate']);
+    Route::get('/', [LoginController::class, 'auth'])->name('log');
+    Route::post('/auth', [LoginController::class, 'authenticate'])->name('auth');
     // Route::get('/regist', [LoginController::class, 'regist']);
     // Route::post('/regist', [LoginController::class, 'registPost'])->name('register');
     // Route::get('/forgotpassword', [LoginController::class, 'forgotpassword']);
@@ -54,7 +54,8 @@ Route::group(['middleware' => 'auth'],function () {
         // Route::post('/panel/addbarangmasuk', 'add')->name('addmasuk');
         Route::get('/panel/addbarangmasuk', 'add')->name('bmasukAdd');
         Route::post('/panel/addbarangmasuk', 'store')->name('bmasukStore');
-        Route::post('/panel/updateBmasuk/{id}', 'update')->name('bmasukUpdate');
+        Route::get('/panel/updatebarangmasuk/{no_transaksi}', 'edit')->name('bmasukEdit');
+        Route::post('/panel/updatebarangmasuk/{no_transaksi}', 'update')->name('bmasukUpdate');
         Route::get('/panel/deleteBmasuk/{id}', 'delete')->name('bmasukDelete');
     });
     

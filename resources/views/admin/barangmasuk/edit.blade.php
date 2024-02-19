@@ -9,28 +9,28 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <form action="{{ route('bmasukStore') }}" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <div class="row">
                         <div class="row -mt-3">
-                            <div class="col-md-6 d-flex flex-wrap gap-3">
+                            <div class="col-md-7 d-flex flex-wrap gap-3">
                                 <div class="">
                                     <label for="no_transaksi" class="form-label">No. Transaksi</label>
-                                    <input type="text" class="form-control" id="no_transaksi" placeholder="Auto" name="no_transaksi">
+                                    <input type="text" class="form-control" id="no_transaksi" placeholder="Auto" name="no_transaksi" value="{{ $transaksi->no_transaksi }}" readonly>
                                   </div>
                                   <div class="">
                                     <label for="tgl_transaksi" class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
+                                    <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi" value="{{ $transaksi->tgl_transaksi }}" readonly>
                                   </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
+ 
+                        <div class="row mt-3">
                             <div class="col-md-4">
                                 <div class="">
                                     <label for="supplier" class="form-label">Supplier</label>
-                                    <input type="text" class="form-control" id="supplier" placeholder="" name="supplier">
+                                    <input type="text" class="form-control" id="supplier" placeholder="" name="supplier" value="{{ $transaksi->kode_supplier }}">
                                   </div>
                             </div>
                         </div>
@@ -46,13 +46,17 @@
                                 </tr>
                             </thead>
                             <tbody class="isi">
+                                @foreach ($item_transaksi as $item)
+                                    
                                 <tr id="row_1" style="height: 20px">
                                     {{-- <td scope="row">1</td> --}}
-                                    <td><input type="text" class="form-control" id="kode_barang_1" name="kode_barang[]"></td>
-                                    <td><input type="text" class="form-control" id="nama_barang_1" name="nama_barang[]"></td>
-                                    <td><input type="text" class="form-control" id="qty_1" name="qty[]"></td>
+                                    <td><input type="text" class="form-control" id="kode_barang_1" name="kode_barang[]" value="{{ $item->kode_barang }}"></td>
+                                    <td><input type="text" class="form-control" id="nama_barang_1" name="nama_barang[]" value="{{ $item->nama_barang }}"></td>
+                                    <td><input type="text" class="form-control" id="qty_1" name="qty[]" value="{{ $item->qty }}"></td>
                                     <td scope="row"><div id="delete_1" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
                                 </tr>
+
+                                @endforeach
                             </tbody>
                         </table>
 
@@ -62,7 +66,7 @@
                         <div class="row mt-5">
                             <div class="col-md-6">
                                 <label for="keterangan" class="form-label">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan" name="keterangan">
+                                <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{ $transaksi->keterangan }}">
                             </div>
                             <div class="col-md-2">
                                 <label for="total_item" class="form-label">Total Item:</label>
