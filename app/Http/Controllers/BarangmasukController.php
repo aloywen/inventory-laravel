@@ -95,21 +95,14 @@ class BarangmasukController extends Controller
     
     public function edit(Request $request)
     {
-        // var_dump($request->no_transaksi);
 
         $contoh1 = substr_replace($request->no_transaksi, '/', 2, 0);
         $contoh2 = substr_replace($contoh1, '/', 7, 0);
         $no_transk = substr_replace($contoh2, '/', 10, 0);
 
-        // $transaksi = DB::table('barang_masuk')->first()->where('no_transaksi',$no_transk);
-
         $transaksi = Barangmasuk::where('no_transaksi',$no_transk)->first();
 
         $item_transaksi = DB::table('item_transaksi')->join('barang', 'item_transaksi.kode_barang', '=', 'barang.kode_barang')->select('item_transaksi.*', 'barang.nama_barang')->get()->where('no_transaksi',$no_transk);
- 
-        // var_dump($transaksi);
-        // var_dump('<br>');
-        // var_dump($item_transaksi);
 
         $data = [
             'title' => 'Edit Barang Masuk',
@@ -118,6 +111,25 @@ class BarangmasukController extends Controller
         ];
 
         return view('admin.barangmasuk.edit', $data);
+    }
+
+    public function print(Request $request)
+    {
+        $contoh1 = substr_replace($request->no_transaksi, '/', 2, 0);
+        $contoh2 = substr_replace($contoh1, '/', 7, 0);
+        $no_transk = substr_replace($contoh2, '/', 10, 0);
+
+        $transaksi = Barangmasuk::where('no_transaksi',$no_transk)->first();
+
+        $item_transaksi = DB::table('item_transaksi')->join('barang', 'item_transaksi.kode_barang', '=', 'barang.kode_barang')->select('item_transaksi.*', 'barang.nama_barang')->get()->where('no_transaksi',$no_transk);
+
+        $data = [
+            'title' => 'Print Barang Masuk',
+            'transaksi' => $transaksi,
+            'item_transaksi' => $item_transaksi,
+        ];
+
+        return view('admin.barangmasuk.print', $data);
     }
 
     public function update(Request $request)

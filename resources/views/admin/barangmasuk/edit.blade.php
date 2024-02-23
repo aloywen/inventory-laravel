@@ -78,15 +78,20 @@
                             </div>
                         </div>
                         
+                    </form>
                             <div class="d-flex gap-3 mt-5">
-                                <button class="btn btn-primary px-5" id="addField">+ Tambah</button>
-                                <button type="submit" class="btn btn-success px-5" id="addField"><i class="bi bi-floppy2"></i> Simpan</button>
-                                <button class="btn btn-dark px-5" id="addField"><i class="bi bi-printer-fill"></i> Print</button>
+                                <a href="{{ route('bmasukAdd') }}" onclick="return confirm('Tambah transaksi baru?')"><button class="btn btn-primary px-5">+ Tambah</button></a>
+                                <button type="submit" class="btn btn-success px-5"><i class="bi bi-floppy2"></i> Simpan</button>
+
+                                <?php
+                                    $no_trans = str_replace('/', '', $transaksi->no_transaksi);
+                                ?>
+                                <a href="{{ route('bmasukPrint',$no_trans) }}">
+                                <button class="btn btn-dark px-5"><i class="bi bi-printer-fill"></i> Print</button></a>
                             
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </section>

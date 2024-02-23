@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'],function () {
         Route::get('/panel/updatebarangmasuk/{no_transaksi}', 'edit')->name('bmasukEdit');
         Route::post('/panel/updatebarangmasuk/{no_transaksi}', 'update')->name('bmasukUpdate');
         Route::get('/panel/deleteBmasuk/{id}', 'delete')->name('bmasukDelete');
+        Route::get('/panel/printbarangmasuk/{no_transaksi}', 'print')->name('bmasukPrint');
     });
     
     // Barang Keluar
