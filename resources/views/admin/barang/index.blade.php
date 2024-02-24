@@ -95,28 +95,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Nama Barang</label>
-                            <input type="text" id="name" class="form-control round" name="name" required autocomplete="off">
+                            <label for="kode_barang">Kode Barang</label>
+                            <input type="text" id="kode_barang" class="form-control round" name="kode_barang" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="name">Category</label>
-                            {{-- <input type="text" id="name" class="form-control round" name="category_id" required autocomplete="off"> --}}
-                            <div class="form-group">
-                                <select class="choices form-select multiple-remove" multiple="multiple">
-                                    <optgroup label="Figures">
-                                        <option value="romboid">Romboid</option>
-                                        <option value="trapeze" selected>Trapeze</option>
-                                        <option value="triangle">Triangle</option>
-                                        <option value="polygon">Polygon</option>
-                                    </optgroup>
-                                    <optgroup label="Colors">
-                                        <option value="red">Red</option>
-                                        <option value="green">Green</option>
-                                        <option value="blue" selected>Blue</option>
-                                        <option value="purple">Purple</option>
-                                    </optgroup>
-                                </select>
-                            </div>
+                            <label for="nama_barang">Nama Barang</label>
+                            <input type="text" id="nama_barang" class="form-control round" name="nama_barang" required autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -152,12 +136,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Nama Barang</label>
-                            <input type="text" id="name" value="{{ $u->name }}" class="form-control round" name="name" required autocomplete="off">
+                            <label for="kode_barang">Kode Barang</label>
+                            <input type="text" id="kode_barang" value="{{ $u->kode_barang }}" class="form-control round" name="kode_barang" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="name">Category</label>
-                            {{-- <input type="text" id="name" value="{{ $u->category_id }}" class="form-control round" name="category_id" required autocomplete="off"> --}}
+                            <label for="nama_barang">Nama Barang</label>
+                            <input type="text" id="nama_barang" value="{{ $u->nama_barang }}" class="form-control round" name="nama_barang" required autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
