@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangkeluarController;
 use App\Http\Controllers\BarangmasukController;
 
@@ -46,6 +47,14 @@ Route::group(['middleware' => 'auth'],function () {
         Route::post('/panel/user', 'store')->name('userStore');
         Route::post('/panel/updateuser/{id}', 'update')->name('userUpdate');
         Route::get('/panel/deleteuser/{id}', 'delete')->name('userDelete');
+    });
+
+    // barang
+    Route::controller(BarangController::class)->group(function () {
+        Route::get('/panel/barang', 'index')->name('barang');
+        Route::post('/panel/barang', 'store')->name('barangStore');
+        Route::post('/panel/updatebarang/{id}', 'update')->name('barangUpdate');
+        Route::get('/panel/deletebarang/{id}', 'delete')->name('barangDelete');
     });
 
     // Barang Masuk

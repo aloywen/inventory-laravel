@@ -62,6 +62,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ ($title === 'Data Barang' ? 'active' : '') }} ">
+                    <a href="{{ route('barang') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Data Barang</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{ ($title === 'Barang Masuk' ? 'active' : '') }} ">
                     <a href="{{ url('/panel/barangmasuk') }}" class='sidebar-link'>
                         <i class="bi bi-box-arrow-in-right"></i>

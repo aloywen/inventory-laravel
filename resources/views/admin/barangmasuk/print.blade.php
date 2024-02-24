@@ -12,21 +12,17 @@
 
     <h5>PT. YAHUUUD</h5>
     <h5 class="re">Jl. Raya Sumber Jaya No.18 Tambun - Bekasi</h5>
-    <h5>Telp. 021 22162106
+    <h5 class="mb-5">Telp. 021 22162106
     </h5>
 
-    <h5 class="text-right">No. Transaksi : </h5>
 
     <div class="row">
-        <h5 class="col-md-6">No. RM : </h5>
-        <h5 class="col-md-6">Register  : </h5>
+        <h5 class="col-md-6">No. Transaksi : {{ $transaksi->no_transaksi }}</h5>
+        <h5 class="col-md-6">Tanggal Transaksi  : {{ date('d F Y', $transaksi->created_at) }}</h5>
     </div>
 
-    <h5 class="re">Nm. pasien :  </h5>
-
     <div class="row">
-        <h5 class="col-md-6">Penanggung : </h5>
-        <h5 class="col-md-6">Nm. Dokter : </h5>
+        <h5 class="col-md-6">Supplier : {{ $transaksi->kode_supplier }}</h5>
     </div>
 
     <hr class="g">
@@ -52,20 +48,6 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h5>Copy Resep</h5>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row d-flex-wrap">
-                    {{-- <?php foreach ($data_obat as $r) : ?>
-                        <?php if($r['ket'] == 'O'){
-                            echo "<div class='col-md-6'>";
-                            echo "-" .$r['nama'];  echo "  (" .$r['qty']. ")";
-                            echo "</div>";
-                        }?>
-                    <?php endforeach; ?> --}}
-                    </div>
-                </div>
-            </div> 
         </div>
         <div class="col-md-6">
             <h5 class="text-center">Bekasi, <?php date_default_timezone_set('Asia/Jakarta'); 
