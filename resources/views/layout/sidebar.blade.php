@@ -64,7 +64,7 @@
 
                 <li class="sidebar-item {{ ($title === 'Data Barang' ? 'active' : '') }} ">
                     <a href="{{ route('barang') }}" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-in-right"></i>
+                        <i class="bi bi-box-seam-fill"></i>
                         <span>Data Barang</span>
                     </a>
                 </li>

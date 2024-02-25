@@ -14,6 +14,7 @@ class Barang extends Model
     protected $fillable = [
         'kode_barang',
         'nama_barang',
+        'stok',
     ];
 
     const CREATED_AT = 'created_at';

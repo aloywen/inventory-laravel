@@ -44,6 +44,15 @@
             <h5 class="card-title">
                 Data Barang
             </h5>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-striped" id="table1">
@@ -66,7 +75,7 @@
                         <td>{{ $u->stok }}</td>
                         <td>
                             <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}">Edit</button>
-                            <a href="/panel/deletefitur/{{ $u->id }}">
+                            <a href="{{ route('barangDelete', $u->id) }}">
                             <button type="submit" class="btn badge bg-danger" onclick="return confirm('yakin dihapus?')">
                                     Hapus
                                 </button>
@@ -96,23 +105,23 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="kode_barang">Kode Barang</label>
-                            <input type="text" id="kode_barang" class="form-control round" name="kode_barang" required autocomplete="off">
+                            <input type="text" id="kode_barang" class="form-control" name="kode_barang" required autocomplete="off" value="{{ old('kode_barang') }}">
                         </div>
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang</label>
-                            <input type="text" id="nama_barang" class="form-control round" name="nama_barang" required autocomplete="off">
+                            <input type="text" id="nama_barang" class="form-control" name="nama_barang" required autocomplete="off" value="{{ old('nama_barang') }}">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"
                             data-bs-dismiss="modal">
                             <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
+                            <span class="d-none d-sm-block">Tutup</span>
                         </button>
 
-                        <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                        <button type="submit" class="btn btn-success ms-1" data-bs-dismiss="modal">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
+                            <span class="d-none d-sm-block">Simpan</span>
                         </button>
                     </div>
                 </div>
@@ -124,7 +133,7 @@
 @foreach ($barang as $u)
     <div class="modal fade" id="exampleModalLongEdit{{ $u->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="/panel/updatefitur/{{ $u->id }}" method="POST">
+            <form action="{{ route('barangUpdate',$u->id) }}" method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
@@ -137,11 +146,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="kode_barang">Kode Barang</label>
-                            <input type="text" id="kode_barang" value="{{ $u->kode_barang }}" class="form-control round" name="kode_barang" required autocomplete="off">
+                            <input type="text" id="kode_barang" value="{{ $u->kode_barang }}" class="form-control" name="kode_barang" required autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang</label>
-                            <input type="text" id="nama_barang" value="{{ $u->nama_barang }}" class="form-control round" name="nama_barang" required autocomplete="off">
+                            <input type="text" id="nama_barang" value="{{ $u->nama_barang }}" class="form-control" name="nama_barang" required autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
