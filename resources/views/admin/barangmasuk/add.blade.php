@@ -47,11 +47,18 @@
                             </thead>
                             <tbody class="isi">
                                 <tr id="row_1" style="height: 20px">
-                                    {{-- <td scope="row">1</td> --}}
-                                    <td><input type="text" class="form-control" id="kode_barang_1" name="kode_barang[]"></td>
-                                    <td><input type="text" class="form-control" id="nama_barang_1" name="nama_barang[]"></td>
-                                    <td><input type="text" class="form-control" id="qty_1" name="qty[]"></td>
-                                    <td scope="row"><div id="delete_1" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
+                                    <td>
+                                        <input data-field-name="kode" type="text" class="form-control" id="kode_barang_1" name="kode_barang[]" class="autocomplete autoKodebarang js-example-basic-single" autocomplete="off" value="">
+                                    </td>
+                                    <td>
+                                        <input data-field-name="kode" type="text" class="form-control autocomplete autoKodebarang" id="nama_barang_1" name="nama_barang[]" autocomplete="off">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="qty_1" name="qty[]">
+                                    </td>
+                                    <td scope="row">
+                                        <div id="delete_1" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

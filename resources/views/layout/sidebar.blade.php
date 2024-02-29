@@ -62,6 +62,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ ($title === 'Data Supplier' ? 'active' : '') }} ">
+                    <a href="{{ route('supplier') }}" class='sidebar-link'>
+                        <i class="bi bi-person-vcard-fill"></i>
+                        <span>Data Supplier</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{ ($title === 'Data Barang' ? 'active' : '') }} ">
                     <a href="{{ route('barang') }}" class='sidebar-link'>
                         <i class="bi bi-box-seam-fill"></i>

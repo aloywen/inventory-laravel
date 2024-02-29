@@ -103,7 +103,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group" id="kode_b">
                             <label for="kode_barang">Kode Barang</label>
                             <input type="text" id="kode_barang" class="form-control" name="kode_barang" required autocomplete="off" value="{{ old('kode_barang') }}">
                         </div>

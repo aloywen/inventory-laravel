@@ -52,10 +52,18 @@
                                 <?php $no++ ?>
                                 <tr id="row_<?= $no ?>" style="height: 20px">
                                     {{-- <td scope="row">1</td> --}}
-                                    <td><input type="text" class="form-control" id="kode_barang_<?php $no = 1; ?>" name="kode_barang[]" value="{{ $item->kode_barang }}"></td>
-                                    <td><input type="text" class="form-control" id="nama_barang_<?php $no = 1; ?>" name="nama_barang[]" value="{{ $item->nama_barang }}"></td>
-                                    <td><input type="text" class="form-control" id="qty_<?php $no = 1; ?>" name="qty[]" value="{{ $item->qty }}"></td>
-                                    <td scope="row"><div id="delete_<?php $no = 1; ?>" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
+                                    <td>
+                                        <input type="text" class="form-control" id="kode_barang_<?php $no = 1; ?>" name="kode_barang[]" value="{{ $item->kode_barang }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="nama_barang_<?php $no = 1; ?>" name="nama_barang[]" value="{{ $item->nama_barang }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="qty_<?php $no = 1; ?>" name="qty[]" value="{{ $item->qty }}">
+                                    </td>
+                                    <td scope="row">
+                                        <div id="delete_<?php $no = 1; ?>" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

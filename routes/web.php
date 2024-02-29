@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangkeluarController;
 use App\Http\Controllers\BarangmasukController;
 
@@ -49,9 +50,21 @@ Route::group(['middleware' => 'auth'],function () {
         Route::get('/panel/deleteuser/{id}', 'delete')->name('userDelete');
     });
 
+
+    // supplier
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/panel/supplier', 'index')->name('supplier');
+        Route::post('/panel/supplier', 'store')->name('supplierStore');
+        Route::post('/panel/updatesupplier/{id}', 'update')->name('supplierUpdate');
+        Route::get('/panel/deletesupplier/{id}', 'delete')->name('supplierDelete');
+    });
+
+
+
     // barang
     Route::controller(BarangController::class)->group(function () {
         Route::get('/panel/barang', 'index')->name('barang');
+        Route::get('/panel/autocompleteb', 'autocompleteKode')->name('autocompleteKBarang');
         Route::post('/panel/barang', 'store')->name('barangStore');
         Route::post('/panel/updatebarang/{id}', 'update')->name('barangUpdate');
         Route::get('/panel/deletebarang/{id}', 'delete')->name('barangDelete');
