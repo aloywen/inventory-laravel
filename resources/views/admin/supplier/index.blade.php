@@ -30,7 +30,7 @@
         <div class="col-12 col-md-6 order-md-1 order-last">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
                 Tambah Supplier
-            </button>
+            </button> 
 
         </div>
     </div>
@@ -43,6 +43,15 @@
             <h5 class="card-title">
                 Data <?= $title ?>
             </h5>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-striped" id="table1">
@@ -63,7 +72,7 @@
                         <td>{{ $u->alamat }}</td>
                         <td>
                             {{-- <a href="{{ route('bmasukEdit',$no_trans) }}"> --}}
-                                <button class="btn badge bg-warning">
+                                <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}"">
                                     Lihat
                                 </button>
                             {{-- </a> --}}
@@ -150,7 +159,7 @@
                     </div>
                     <div class="form-group">
                         <label for="alamat_supplier">Alamat</label>
-                        <input type="text" id="alamat_supplier" value="{{ $u->alamat_supplier }}" class="form-control" name="alamat_supplier" required autocomplete="off">
+                        <input type="text" id="alamat_supplier" value="{{ $u->alamat }}" class="form-control" name="alamat_supplier" required autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
