@@ -41,61 +41,64 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
-                
-                <li class="sidebar-item {{ ($title === 'Dashboard' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/dashboard') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ ($title === 'Role' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/role') }}" class='sidebar-link'>
-                        <i class="bi bi-person-fill-gear"></i>
-                        <span>Role</span>
-                    </a>
-                </li>
+                @if (auth()->user()->role_id === 1)
+                    <li class="sidebar-item ($title === 'Dashboard' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/dashboard') }}" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{ ($title === 'Role' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/role') }}" class='sidebar-link'>
+                            <i class="bi bi-person-fill-gear"></i>
+                            <span>Role</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item {{ ($title === 'Users' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/users') }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item {{ ($title === 'Users' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/users') }}" class='sidebar-link'>
+                            <i class="bi bi-people-fill"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    
+                @else
+                    <li class="sidebar-item {{ ($title === 'Data Supplier' ? 'active' : '') }} ">
+                        <a href="{{ route('supplier') }}" class='sidebar-link'>
+                            <i class="bi bi-person-vcard-fill"></i>
+                            <span>Data Supplier</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item {{ ($title === 'Data Supplier' ? 'active' : '') }} ">
-                    <a href="{{ route('supplier') }}" class='sidebar-link'>
-                        <i class="bi bi-person-vcard-fill"></i>
-                        <span>Data Supplier</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item {{ ($title === 'Data Barang' ? 'active' : '') }} ">
+                        <a href="{{ route('barang') }}" class='sidebar-link'>
+                            <i class="bi bi-box-seam-fill"></i>
+                            <span>Data Barang</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item {{ ($title === 'Data Barang' ? 'active' : '') }} ">
-                    <a href="{{ route('barang') }}" class='sidebar-link'>
-                        <i class="bi bi-box-seam-fill"></i>
-                        <span>Data Barang</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item {{ ($title === 'Barang Masuk' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/barangmasuk') }}" class='sidebar-link'>
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span>Barang Masuk</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item {{ ($title === 'Barang Masuk' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/barangmasuk') }}" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        <span>Barang Masuk</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item {{ ($title === 'Barang Keluar' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/barangkeluar') }}" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-in-left"></i>
-                        <span>Barang Keluar</span>
-                    </a>
-                </li>
-                
-                <li class="sidebar-item {{ ($title === 'Laporan' ? 'active' : '') }} ">
-                    <a href="{{ url('/panel/laporan') }}" class='sidebar-link'>
-                        <i class="bi bi-clipboard2-check-fill"></i>
-                        <span>Laporan</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item {{ ($title === 'Barang Keluar' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/barangkeluar') }}" class='sidebar-link'>
+                            <i class="bi bi-box-arrow-in-left"></i>
+                            <span>Barang Keluar</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-item {{ ($title === 'Laporan' ? 'active' : '') }} ">
+                        <a href="{{ url('/panel/laporan') }}" class='sidebar-link'>
+                            <i class="bi bi-clipboard2-check-fill"></i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
+                    
+                @endif
 
                 
                 
@@ -115,7 +118,7 @@
                         
                         {{-- <li class="submenu-item  ">
                             <a href="#" class="submenu-link">Penjualan</a>
-                        </li> --}}
+                        </li> --}}`
                     </ul>
                     
                 </li>
