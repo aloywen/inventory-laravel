@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoleController;
@@ -35,16 +36,17 @@ Route::group(['middleware' => 'auth'],function () {
         Route::get('/panel/role', 'role');
         Route::get('/panel/users', 'users');
     });
-
+    
     // role
     Route::controller(RoleController::class)->group(function () {
         Route::post('/panel/role', 'store')->name('roleStore');
         Route::post('/panel/updaterole/{id}', 'update')->name('roleUpdate');
         Route::get('/panel/deleterole/{id}', 'delete')->name('deleteStore');
     });
-
+    
     // users
     Route::controller(UserController::class)->group(function () {
+        // Route::get('/panel/users', 'index');
         Route::post('/panel/user', 'store')->name('userStore');
         Route::post('/panel/updateuser/{id}', 'update')->name('userUpdate');
         Route::get('/panel/deleteuser/{id}', 'delete')->name('userDelete');

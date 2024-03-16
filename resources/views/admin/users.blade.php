@@ -12,6 +12,27 @@
             </button>
         </div>
     </div>
+
+    @if (session('userNew'))
+        <div class="alert alert-success alert-dismissible show fade">
+            {{ session('userNew') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('userUpdate'))
+        <div class="alert alert-success alert-dismissible show fade">
+            {{ session('userUpdate') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('userDelete'))
+        <div class="alert alert-success alert-dismissible show fade">
+            {{ session('userDelete') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     
 </div>
 
@@ -22,12 +43,22 @@
             <h5 class="card-title">
                 Data Users
             </h5>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-striped table-responsive" id="table1">
                 <thead>
                     <tr>
-                        <th>Email</th>
+                        <th>Username</th>
                         <th>Name</th>
                         <th>Role</th>
                         <th></th>
@@ -36,12 +67,14 @@
                 <tbody>
                     @foreach ($users as $u)
                     <tr>
-                        <td>{{ $u->email }}</td>
+                        <td>{{ $u->username }}</td>
                         <td>{{ $u->name }}</td>
-                        <td>{{ $u->role_id }}</td>
+                        <td>{{ $u->role->name }}</td>
                         <td>
-                            <button class="btn badge bg-warning">Edit</button>
-                            <button class="btn badge bg-danger" onclick="confirm()">Hapus</button>
+                            <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}">Edit</button>
+                            <a href="{{ route('userDelete', $u->id) }}">
+                                <button class="btn badge bg-danger" onclick="confirm('yakin dihapus?')">Hapus</button>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -54,7 +87,7 @@
  {{-- modal tambah data --}}
  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('roleStore') }}" method="POST">
+        <form action="{{ route('userStore') }}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -68,6 +101,19 @@
                     <div class="form-group">
                         <label for="name">Nama User</label>
                         <input type="text" id="name" class="form-control round" name="name" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control round" name="username" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="role_id">Role</label>
+                        {{-- <input type="text" id="role_id" class="form-control round" name="role_id" required autocomplete="off"> --}}
+                        <select class="form-select" name="role_id" aria-label="Default select example">
+                            <option selected>Role</option>
+                            <option value="1">Adminstrator</option>
+                            <option value="2">Staff</option>
+                          </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -91,7 +137,7 @@
 @foreach ($users as $u)
     <div class="modal fade" id="exampleModalLongEdit{{ $u->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="/panel/updaterole/{{ $u->id }}" method="POST">
+            <form action={{ route('userUpdate', $u->id) }} method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
@@ -103,8 +149,24 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Nama Role</label>
+                            <label for="name">Nama User</label>
                             <input type="text" id="name" value="{{ $u->name }}" class="form-control round" name="name" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" value="{{ $u->username }}" class="form-control round" name="username" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Role</label>
+                            <select id="role_id" name="role_id" class="form-control">
+                                <option selected value="{{ $u->role_id }}">{{ $u->role->name }}</option>
+                                <option value="1">Adminstrator</option>
+                                <option value="2">Staff</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Status</label>
+                            <input type="text" id="name" value="{{ $u->status }}" class="form-control round" name="name" required autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">

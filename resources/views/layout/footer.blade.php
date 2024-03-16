@@ -20,14 +20,23 @@
 <script src="{{ url('dist/assets/compiled/js/app.js')}}"></script>
 
 
-{{-- <script src="{{ url('dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+<script src="{{ url('dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
 <script src="{{ url('dist/assets/static/js/pages/simple-datatables.js') }}"></script>
 
-<script src="{{ url('dist/assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
+{{-- <script src="{{ url('dist/assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
 <script src="{{ url('dist/assets/static/js/pages/form-element-select.js') }}"></script> --}}
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> --}}
 
 <script>
+    $(document).ready(function () {
+        $('#table1').DataTable({
+            "serverSide": true,
+            "deferRender": true,
+            "processing": true,
+        });
+    });
+
+
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
@@ -173,17 +182,6 @@
     
 </script>
 
-// <script>
-//     let route = "{{ route('autocompleteKBarang') }}";
-//     $('#kode_barang').typeahead({
-//         source: function (query, process) {
-//             return $.get(route, {query: query}, function (data) {
-//                 console.log(data)
-//                 return process(data);
-//             });
-//         }
-//     });
-// </script>
 </body>
 
 </html>

@@ -72,7 +72,7 @@
                         <td>{{ $u->alamat }}</td>
                         <td>
                             {{-- <a href="{{ route('bmasukEdit',$no_trans) }}"> --}}
-                                <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}"">
+                                <button class="btn badge bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModalLongEdit{{ $u->id }}">
                                     Lihat
                                 </button>
                             {{-- </a> --}}

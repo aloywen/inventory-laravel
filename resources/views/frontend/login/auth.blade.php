@@ -34,7 +34,7 @@
             <form action="{{ route('auth') }}" method="POST">
                 @csrf
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="email" class="form-control form-control-xl" name="email" value="{{ old('email') }}" placeholder="example.gmail.com" required>
+                    <input type="text" class="form-control form-control-xl" name="username" value="{{ old('username') }}" placeholder="username" required>
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
