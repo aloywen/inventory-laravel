@@ -67,11 +67,11 @@ class BarangController extends Controller
 
     public function autocompleteKode(Request $request)
     {
-        $name=$_GET['name'];
-          $datas = Barang::where('kode_barang', 'LIKE', '%'. $name. '%')->get();
+        $name=$_GET['search'];
+        $datas = Barang::where('nama_barang', 'LIKE', '%'. $name. '%')->get();
 
 
-            return response()->json($datas);
+        return response()->json($datas);
 
     }
 

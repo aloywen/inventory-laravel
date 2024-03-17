@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="{{ url('dist/assets/compiled/css/table-datatable.css') }}">
     <link rel="stylesheet" href="{{ url('dist/assets/extensions/choices.js/public/assets/styles/choices.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 
 <body>

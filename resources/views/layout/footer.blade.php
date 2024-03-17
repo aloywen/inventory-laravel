@@ -13,6 +13,7 @@
 </div>
 </div>
 <script src="{{ url('dist/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="{{ url('dist/select2.min.js')}}"></script>
 <script src="{{ url('dist/assets/static/js/components/dark.js')}}"></script>
 <script src="{{ url('dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
@@ -51,8 +52,8 @@
             count++
             $(".isi").append(`
             <tr id="row_${count}" style="height: 20px">
-                <td><input type="text" class="form-control" id="kode_barang_${count}" name="kode_barang[]"></td>
-                <td><input type="text" class="form-control" id="nama_barang_${count}" name="nama_barang[]"></td>
+                <td><input data-field-name="kode" type="text" class="form-control autoKodebarang" id="kode_barang_${count}" name="kode_barang[]"></td>
+                <td><input data-field-name="barang" type="text" class="form-control autoNamabarang" id="nama_barang_${count}" name="nama_barang[]"></td>
                 <td><input type="text" class="form-control" id="qty_${count}" name="qty[]"></td>
                 <td scope="row"><div id="delete_${count}" class="btn btn-danger delete_row"><i class="bi bi-trash-fill"></i></div></td>
                 </tr>
@@ -95,89 +96,156 @@
 
         // HAPUS BARIS
         function deleteRow() {
-        var currentEle, rowNo;
-        currentEle = $(this);
-        rowNo = getID(currentEle)
-        console.log('row', rowNo)
-        $("#row_"+rowNo).remove()
+        var currentEle, rowNo; // buat variable element dan no baris
+
+        currentEle = $(this); // element yang sedang diklik
+
+        rowNo = getID(currentEle) // cari no baris yg sedang diklik
+        // console.log('row', rowNo)
+        $("#row_"+rowNo).remove() // hapus baris sesuai no barisnya
         }
+ 
+        let path = "{{ route('autocompleteKBarang') }}"
 
         // AUTO FILL BARANG MASUK
-        function handleKodebarang() {
+        function handleNamabarang() {
             let fieldName, currentEle
             currentEle = $(this);
             
             fieldName = currentEle.data('field-name')
 
-            console.log('saas',fieldName)
+            // console.log('saas',fieldName)
 
             if(typeof fieldName === 'undefined'){
-                // return false;
-                console.log('salah')
+                return false;
             }
 
             currentEle.autocomplete({
-                source: function (data, cb) {
-                console.log('data'+ data);
-                $.ajax({
-                    url:"{{ route('autocompleteKBarang') }}",
-                    dataType: 'json',
+                minLength: 3,
+                source: function( request, response ) {
+                    $.ajax({
+                    url: path,
+                    type: 'GET',
+                    dataType: "json",
                     data: {
-                    name: data.term,
-                    fieldName: fieldName
+                        search: request.term
                     },
-                    success: function(res) {
-                    var result;
-                    result = [
-                        {
-                        label: data.term+ ' Tidak ada',
-                        value: ''
+                    success: function( data ) {
+                        // console.log(data)
+                        var result;
+                        result = [
+                            {
+                            label: request.term+ ' Tidak ada',
+                            value: ''
+                            }
+                        ];
+                        // console.log('tes format', res);
+
+                        if(data.length){
+                            result = $.map(data, function(obj) {
+                            // console.log('apa sih obj', obj)
+                            return {
+                                label: obj.kode_barang + ' - ' + obj.nama_barang + ' - Stok: ' + obj.stok,
+                                value: obj.nama_barang,
+                                data: obj,
+                            }
+                            })
                         }
-                    ];
-                    // console.log('tes format', res);
 
-                    if(res.length){
-                        result = $.map(res, function(obj) {
-                        // console.log('apa sih obj', obj)
-                        return {
-                            label: obj.kode_barang + ' - ' + obj.nama_barang,
-                            value: obj.nama,
-                            data: obj,
-                        }
-                        })
+                        // console.log('abis format', result)
+                        response(result)
+                        
                     }
+                });
+                },  
+                select: function( event, selectedData ) {
+                    // console.log(selectedData)
+                    if(selectedData && selectedData.item && selectedData.item.data){
+                        var rowNo, data;
+                        rowNo = getID($(this))
+                        // console.log('id',rowNo)
+                        data = selectedData.item.data;
+                        $('#kode_barang_'+rowNo).val(data.kode_barang)
+                        $('#nama_barang_'+rowNo).val(data.nama_barang)
 
-                    // console.log('abis format', result)
-                    cb(result)
                     }
-                })
-                },
-                autoFocus: true,
-                minLength: 1,
-                select: function(event, selectedData) {
-                console.log(selectedData);
-                if(selectedData && selectedData.item && selectedData.item.data){
-                    var rowNo, data;
-                    rowNo = getID(currentEle)
-                    // console.log('id',rowNo)
-                    data = selectedData.item.data;
-                    $('#kode_barang_'+rowNo).val(data.kode_barang)
-                    $('#nama_barang_'+rowNo).val(data.nama_barang)
-
-                }
                 }
             })
 
         }
     
     function registerEvents() {
-      $(document).on('change', '.autocomplete', handleKodebarang)
+      $(document).on('focus', '.autoNamabarang', handleNamabarang)
       $(document).on('click', '.delete_row', deleteRow)
     }
 
     registerEvents();
 
     });
+
+    // let path = "{{ route('autocompleteKBarang') }}"
+
+    // $(document).ready(function() {
+    //     function getID(element) {
+    //     var id, adArr;
+    //     id = element.attr('id')
+    //     idArr = id.split("_")
+    //     return idArr[idArr.length - 1]
+    //     }
+
+
+    //     $( ".autoNamabarang" ).autocomplete({
+    //         minLength: 3,
+    //         source: function( request, response ) {
+    //             $.ajax({
+    //             url: path,
+    //             type: 'GET',
+    //             dataType: "json",
+    //             data: {
+    //                 search: request.term
+    //             },
+    //             success: function( data ) {
+    //                 // console.log(data)
+    //                 var result;
+    //                 result = [
+    //                     {
+    //                     label: request.term+ ' Tidak ada',
+    //                     value: ''
+    //                     }
+    //                 ];
+    //                 // console.log('tes format', res);
+
+    //                 if(data.length){
+    //                     result = $.map(data, function(obj) {
+    //                     // console.log('apa sih obj', obj)
+    //                     return {
+    //                         label: obj.kode_barang + ' - ' + obj.nama_barang + ' - Stok: ' + obj.stok,
+    //                         value: obj.nama_barang,
+    //                         data: obj,
+    //                     }
+    //                     })
+    //                 }
+
+    //                 // console.log('abis format', result)
+    //                 response(result)
+                    
+    //             }
+    //         });
+    //         },  
+    //         select: function( event, selectedData ) {
+    //             console.log(selectedData)
+    //             if(selectedData && selectedData.item && selectedData.item.data){
+    //                 var rowNo, data;
+    //                 rowNo = getID($(this))
+    //                 // console.log('id',rowNo)
+    //                 data = selectedData.item.data;
+    //                 $('#kode_barang_'+rowNo).val(data.kode_barang)
+    //                 $('#nama_barang_'+rowNo).val(data.nama_barang)
+
+    //             }
+    //         }
+    //     })
+    // })
 
     
 </script>
