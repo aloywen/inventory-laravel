@@ -30,11 +30,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#table1').DataTable({
-            "serverSide": true,
-            "deferRender": true,
-            "processing": true,
-        });
+        $('#table1').DataTable();
     });
 
 
@@ -88,7 +84,7 @@
     $(document).ready(function() {
 
         function getID(element) {
-        var id, adArr;
+        let id, adArr;
         id = element.attr('id')
         idArr = id.split("_")
         return idArr[idArr.length - 1]
