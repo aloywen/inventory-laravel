@@ -9,7 +9,7 @@ use App\Models\Supplier;
 class SupplierController extends Controller
 {
     public function index()
-    {
+    { 
         $data = [
             'title' => 'Data Supplier',
             'supplier' => Supplier::all(),
@@ -22,7 +22,7 @@ class SupplierController extends Controller
         $credentials = $request->validate([
             'kode_supplier' => 'required|unique:App\Models\Supplier,kode_supplier',
             'nama_supplier' => 'required',
-            'alamat' => 'required'
+            'alamat_supplier' => 'required'
         ]);
 
         $data = [
@@ -55,7 +55,7 @@ class SupplierController extends Controller
             $credentials = $request->validate([
                 'kode_supplier' => 'required|unique:App\Models\Supplier,kode_supplier',
                 'nama_supplier' => 'required',
-                'alamat'
+                'alamat_suppiler' => 'required'
             ]);
 
             $data->kode_supplier = $request->kode_supplier;
