@@ -77,4 +77,13 @@ class SupplierController extends Controller
         
         return redirect()->back()->with('supplierDelete', 'Supplier berhasil dihapus!');
     }
+
+    public function autocompleteSupplier(Request $request)
+    {
+        $name=$_GET['search'];
+        $datas = Supplier::where('nama_supplier', 'LIKE', '%'. $name. '%')->get();
+
+
+        return response()->json($datas);
+    }
 }

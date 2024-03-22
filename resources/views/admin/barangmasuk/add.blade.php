@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="">
                                     <label for="supplier" class="form-label">Supplier</label>
-                                    <input type="text" class="form-control" id="supplier" placeholder="" name="supplier">
+                                    <input data-field-name="supplier" type="text" class="form-control autoSupplier" id="supplier" placeholder="" name="supplier">
                                   </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                 <input type="text" class="form-control" id="total_item" name="total_item" readonly>
                             </div>
                             <div>
-                                <input type="hidden" name="user_buat" value="{{ auth()->user()->name }}">
+                                <input type="hidden" name="user_buat" value="{{ auth()->user()->username }}">
                             </div>
                         </div>
                         

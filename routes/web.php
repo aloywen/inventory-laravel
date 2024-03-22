@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'],function () {
     // supplier
     Route::controller(SupplierController::class)->group(function () {
         Route::get('/panel/supplier', 'index')->name('supplier');
+        Route::get('/panel/autocompletesup', 'autocompleteSupplier')->name('autocompleteSupplier');
         Route::post('/panel/supplier', 'store')->name('supplierStore');
         Route::post('/panel/updatesupplier/{id}', 'update')->name('supplierUpdate');
         Route::get('/panel/deletesupplier/{id}', 'delete')->name('supplierDelete');

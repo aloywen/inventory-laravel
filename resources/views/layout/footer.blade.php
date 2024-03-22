@@ -102,8 +102,75 @@
         }
  
         let path = "{{ route('autocompleteKBarang') }}"
+        let pathSupplier = "{{ route('autocompleteSupplier') }}"
 
         // AUTO FILL BARANG MASUK
+        function handleNamasupplier() {
+            let fieldName, currentEle
+            currentEle = $(this);
+            
+            fieldName = currentEle.data('field-name')
+
+            // console.log('saas',fieldName)
+
+            if(typeof fieldName === 'undefined'){
+                return false;
+            }
+
+            currentEle.autocomplete({
+                minLength: 3,
+                source: function( request, response ) {
+                    $.ajax({
+                    url: pathSupplier,
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function( data ) {
+                        // console.log(data)
+                        var result;
+                        result = [
+                            {
+                            label: request.term+ ' Tidak ada',
+                            value: ''
+                            }
+                        ];
+                        // console.log('tes format', res);
+
+                        if(data.length){
+                            result = $.map(data, function(obj) {
+                            // console.log('apa sih obj', obj)
+                            return {
+                                label: obj.kode_supplier + ' - ' + obj.nama_supplier,
+                                value: obj.nama_supplier,
+                                data: obj,
+                            }
+                            })
+                        }
+
+                        // console.log('abis format', result)
+                        response(result)
+                        
+                    }
+                });
+                },  
+                // select: function( event, selectedData ) {
+                //     // console.log(selectedData)
+                //     if(selectedData && selectedData.item && selectedData.item.data){
+                //         var rowNo, data;
+                //         rowNo = getID($(this))
+                //         // console.log('id',rowNo)
+                //         data = selectedData.item.data;
+                //         $('#kode_barang_'+rowNo).val(data.kode_barang)
+                //         $('#nama_barang_'+rowNo).val(data.nama_barang)
+
+                //     }
+                // }
+            })
+
+        }
+
         function handleNamabarang() {
             let fieldName, currentEle
             currentEle = $(this);
@@ -172,6 +239,7 @@
     
     function registerEvents() {
       $(document).on('focus', '.autoNamabarang', handleNamabarang)
+      $(document).on('focus', '.autoSupplier', handleNamasupplier)
       $(document).on('click', '.delete_row', deleteRow)
     }
 

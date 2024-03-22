@@ -12,9 +12,11 @@ class BarangmasukController extends Controller
 {
     public function index()
     {
+        $first = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $last = Carbon::now()->lastOfMonth()->format('Y-m-d');
         $data = [
             'title' => 'Barang Masuk',
-            'data' => Barangmasuk::all()
+            'data' => Barangmasuk::whereBetween('tgl_transaksi',[$first,$last])->get()
         ];
 
         return view('admin.barangmasuk.index', $data);

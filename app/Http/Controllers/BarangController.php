@@ -82,7 +82,6 @@ class BarangController extends Controller
 
 
         return response()->json($datas);
-
     }
 
 }

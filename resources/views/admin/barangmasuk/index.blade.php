@@ -26,31 +26,49 @@
         </div>
     @endif
 
-    <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <a href="{{ route('bmasukAdd'); }}"><button type="button" class="btn btn-primary">
-                Tambah Transaksi
-            </button></a>
-
-        </div>
-    </div>
+    
 </div>
 
 {{-- ISI --}}
-<section class="section mt-4">
+<section class="section">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">
-                Data <?= $title ?>
-            </h5>
+
+            <div class="gap-4 row">
+                <div class="col-md-3">
+                    <p>Cari Transaksi :</p>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <p>Tanggal Dari : </p>
+                    <input type="date" value="{{ \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d') }}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <p>Tanggal Sampai :</p>
+                    <input type="date" value="{{ \Carbon\Carbon::now()->lastOfMonth()->format('Y-m-d') }}" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <a href="{{ route('bmasukAdd'); }}"><button type="button" class="btn btn-primary">
+                        + Tambah Transaksi
+                    </button></a>
+                </div>
+            </div>
         </div>
+
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-striped" id="">
                 <thead>
                     <tr>
                         <th>Nomor Transaksi</th>
-                        <th>Nama Supplier</th>
                         <th>Tanggal Transaksi</th>
+                        <th>Nama Supplier</th>
+                        <th>User Buat</th>
+                        <th>User Ubah</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -59,8 +77,10 @@
                     @foreach ($data as $u)
                     <tr>
                         <td>{{ $u->no_transaksi }}</td>
-                        <td>{{ $u->kode_supplier }}</td>
                         <td>{{ $u->tgl_transaksi }}</td>
+                        <td>{{ $u->kode_supplier }}</td>
+                        <td>{{ $u->user_buat }}</td>
+                        <td>{{ $u->user_ubah }}</td>
                         <td>
                             <?php
                                 $no_trans = str_replace('/', '', $u->no_transaksi);
