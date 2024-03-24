@@ -230,6 +230,7 @@
                         data = selectedData.item.data;
                         $('#kode_barang_'+rowNo).val(data.kode_barang)
                         $('#nama_barang_'+rowNo).val(data.nama_barang)
+                        $('#qty_'+rowNo).val(1)
 
                     }
                 }
@@ -237,79 +238,16 @@
 
         }
     
-    function registerEvents() {
-      $(document).on('focus', '.autoNamabarang', handleNamabarang)
-      $(document).on('focus', '.autoSupplier', handleNamasupplier)
-      $(document).on('click', '.delete_row', deleteRow)
-    }
+        function registerEvents() {
+        $(document).on('focus', '.autoNamabarang', handleNamabarang)
+        $(document).on('focus', '.autoSupplier', handleNamasupplier)
+        $(document).on('click', '.delete_row', deleteRow)
+        }
 
-    registerEvents();
+        registerEvents();
 
     });
 
-    // let path = "{{ route('autocompleteKBarang') }}"
-
-    // $(document).ready(function() {
-    //     function getID(element) {
-    //     var id, adArr;
-    //     id = element.attr('id')
-    //     idArr = id.split("_")
-    //     return idArr[idArr.length - 1]
-    //     }
-
-
-    //     $( ".autoNamabarang" ).autocomplete({
-    //         minLength: 3,
-    //         source: function( request, response ) {
-    //             $.ajax({
-    //             url: path,
-    //             type: 'GET',
-    //             dataType: "json",
-    //             data: {
-    //                 search: request.term
-    //             },
-    //             success: function( data ) {
-    //                 // console.log(data)
-    //                 var result;
-    //                 result = [
-    //                     {
-    //                     label: request.term+ ' Tidak ada',
-    //                     value: ''
-    //                     }
-    //                 ];
-    //                 // console.log('tes format', res);
-
-    //                 if(data.length){
-    //                     result = $.map(data, function(obj) {
-    //                     // console.log('apa sih obj', obj)
-    //                     return {
-    //                         label: obj.kode_barang + ' - ' + obj.nama_barang + ' - Stok: ' + obj.stok,
-    //                         value: obj.nama_barang,
-    //                         data: obj,
-    //                     }
-    //                     })
-    //                 }
-
-    //                 // console.log('abis format', result)
-    //                 response(result)
-                    
-    //             }
-    //         });
-    //         },  
-    //         select: function( event, selectedData ) {
-    //             console.log(selectedData)
-    //             if(selectedData && selectedData.item && selectedData.item.data){
-    //                 var rowNo, data;
-    //                 rowNo = getID($(this))
-    //                 // console.log('id',rowNo)
-    //                 data = selectedData.item.data;
-    //                 $('#kode_barang_'+rowNo).val(data.kode_barang)
-    //                 $('#nama_barang_'+rowNo).val(data.nama_barang)
-
-    //             }
-    //         }
-    //     })
-    // })
 
     
 </script>

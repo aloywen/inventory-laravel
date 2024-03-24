@@ -72,10 +72,11 @@ Route::group(['middleware' => 'auth'],function () {
         Route::post('/panel/updatebarang/{id}', 'update')->name('barangUpdate');
         Route::get('/panel/deletebarang/{id}', 'delete')->name('barangDelete');
     });
-
+    
     // Barang Masuk
     Route::controller(BarangmasukController::class)->group(function () {
         Route::get('/panel/barangmasuk', 'index')->name('barangmasuk');
+        Route::get('/panel/caribarangByTgl', 'cariBarangByTgl')->name('cariByTgl');
         // Route::post('/panel/addbarangmasuk', 'add')->name('addmasuk');
         Route::get('/panel/addbarangmasuk', 'add')->name('bmasukAdd');
         Route::post('/panel/addbarangmasuk', 'store')->name('bmasukStore');

@@ -18,7 +18,6 @@ class BarangmasukController extends Controller
             'title' => 'Barang Masuk',
             'data' => Barangmasuk::whereBetween('tgl_transaksi',[$first,$last])->get()
         ];
-
         return view('admin.barangmasuk.index', $data);
     }
 
@@ -152,5 +151,20 @@ class BarangmasukController extends Controller
         $loket->delete();
 
         return redirect()->back()->with('bmasukDelete', 'Transaksi dihapus!');
+    }
+
+    public function cariBarangByTgl(Request $request)
+    {
+        $tgl_dari = $request->tgl_dari;
+        $tgl_sampai = $request->tgl_sampai;
+
+        if($request->ajax()){
+
+            $query = Barangmasuk::whereBetween('tgl_transaksi',[$tgl_dari,$tgl_sampai])->get();
+            
+            
+            return response()->json(['data' => $query]);
+        }
+
     }
 }
