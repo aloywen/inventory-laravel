@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Barang;
 use App\Models\Barangmasuk;
 use App\Models\Itemtransaksi;
 use Illuminate\Support\Facades\DB;
@@ -42,56 +43,58 @@ class BarangmasukController extends Controller
     public function store(Request $request)
     {
         $barang_masuk = Barangmasuk::latest()->first();
+
         $kode_transak = "BM";
         $kode_tahun = date('Y');
         $kode_bulan = date('m');
 
         $i = 0;
         $kode_b = $request->kode_barang;
-        // $no_transaksi = $request->no_transaksi;
 
 
         // cek nomor transaksi di tabel barang masuk
         if($barang_masuk == null){
             $nomor = '0001';
-        } else{
+        } elseif($request->no_transaksi === "Auto"){
             $explode = explode("/", $barang_masuk->no_transaksi);
             $nomor = intval($explode[3])+1;
             $nomor = str_pad($nomor, 4, "0", STR_PAD_LEFT);
+
+            // membuat format nomor traksaksi
+            $nomor_transaksi = "$kode_transak/$kode_tahun/$kode_bulan/$nomor";
+        } else {
+            $nomor_transaksi = $request->no_transaksi;
         }
 
-        
-        // var_dump($nomor_transaksi);
-        
-        $nomor_transaksi = "$kode_transak/$kode_tahun/$kode_bulan/$nomor";
-        
+
+
+        // INSERT DATA TRANSAKSI BARANG MASUK
         $transaksi = [
                 'no_transaksi' => $nomor_transaksi,
                 'tgl_transaksi' => $request->tgl_transaksi,
                 'kode_supplier' => $request->supplier,
-                'qty' => $request->qty[$i],
                 'user_buat' => $request->user_buat,
                 'user_ubah' => '',
                 'keterangan' => $request->keterangan,
-            ];
-            $i++;
-            $data = Barangmasuk::create($transaksi);
-            // var_dump($transaksi);
+        ];
+        // $data = Barangmasuk::create($transaksi);
             
-        
+            
+            // INSERT DATA ITEM TRANSAKSI
+        $index = 0;
         foreach($kode_b as $no){
-            $œnomor_transaksi = "$kode_transak/$kode_tahun/$kode_bulan/$nomor";
             $data_item = [
                 'no_transaksi' => $nomor_transaksi,
+                'qty' => $request->qty[$index],
                 'kode_barang' => $no,
                 'tipe' => 'masuk'
             ];
-            $i++;
+            $index++;
             $data = Itemtransaksi::create($data_item);
-            // var_dump($data_tem);
         }
 
         return redirect()->back()->with('bmasukStore', 'Transaksi berhasil ditambah!');
+
     }
     
     public function edit(Request $request)

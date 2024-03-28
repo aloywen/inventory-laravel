@@ -14,6 +14,7 @@ class ItemTransaksi extends Model
     protected $fillable = [
         'no_transaksi',
         'kode_barang',
+        'qty',
         'tipe'
     ];
 
