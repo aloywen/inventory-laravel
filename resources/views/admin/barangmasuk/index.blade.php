@@ -34,22 +34,24 @@
     <div class="card">
         <div class="card-header">
 
-            <div class="gap-4 row">
-                <div class="col-md-3">
-                    <p>Cari Transaksi :</p>
-                    <input type="text" class="form-control">
-                </div>
+            <form action="{{ route('cariByTgl') }}" method="POST" id="formCari">
+                <div class="gap-4 row">
+                    <div class="col-md-3">
+                        <p>Cari Transaksi :</p>
+                        <input type="text" class="form-control">
+                    </div>
 
-                <div class="col-md-3">
-                    <p>Tanggal Dari : </p>
-                    <input type="date" id="tgl_dari" value="{{ \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d') }}" class="form-control">
-                </div>
+                    <div class="col-md-3">
+                        <p>Tanggal Dari : </p>
+                        <input type="date" id="tgl_dari" value="{{ \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d') }}" class="form-control">
+                    </div>
 
-                <div class="col-md-3">
-                    <p>Tanggal Sampai :</p>
-                    <input type="date" id="tgl_sampai" onchange="cariByTgl()" value="{{ \Carbon\Carbon::now()->lastOfMonth()->format('Y-m-d') }}" class="form-control">
+                    <div class="col-md-3">
+                        <p>Tanggal Sampai :</p>
+                        <input type="date" id="tgl_sampai" onchange="" id="dateCari" value="{{ \Carbon\Carbon::now()->lastOfMonth()->format('Y-m-d') }}" class="form-control">
+                    </div>
                 </div>
-            </div>
+            </form>
 
             <div class="row mt-3">
                 <div class="col-12 col-md-6 order-md-1 order-last">
@@ -105,6 +107,14 @@
                     @endforeach
                     @endif
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <p>Total Data : {{ $data->total() }}</p>
+                            {{ $data->links() }}
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -115,6 +125,8 @@
 @endsection
 
 <script>
+        
+
         let urlSearchByTgl = "{{ route('cariByTgl') }}"
 
         function cariByTgl() {
@@ -185,8 +197,10 @@
                             </a>
                         </td>
                     </tr>`;
-            }
-            $('tbody').html(htmlView);
+                }
+
+                $('tbody').html(htmlView);
+
         }
 
 </script>

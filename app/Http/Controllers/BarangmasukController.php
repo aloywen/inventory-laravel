@@ -17,7 +17,7 @@ class BarangmasukController extends Controller
         $last = Carbon::now()->lastOfMonth()->format('Y-m-d');
         $data = [
             'title' => 'Barang Masuk',
-            'data' => Barangmasuk::whereBetween('tgl_transaksi',[$first,$last])->get()
+            'data' => Barangmasuk::whereBetween('tgl_transaksi',[$first,$last])->paginate(2)
         ];
         return view('admin.barangmasuk.index', $data);
     }
@@ -67,33 +67,37 @@ class BarangmasukController extends Controller
         }
 
 
-
-        // INSERT DATA TRANSAKSI BARANG MASUK
-        $transaksi = [
-                'no_transaksi' => $nomor_transaksi,
-                'tgl_transaksi' => $request->tgl_transaksi,
-                'kode_supplier' => $request->supplier,
-                'user_buat' => $request->user_buat,
-                'user_ubah' => '',
-                'keterangan' => $request->keterangan,
-        ];
-        // $data = Barangmasuk::create($transaksi);
+        DB::transaction(function () use($nomor_transaksi, $kode_b, $request) {
             
-            
-            // INSERT DATA ITEM TRANSAKSI
-        $index = 0;
-        foreach($kode_b as $no){
-            $data_item = [
-                'no_transaksi' => $nomor_transaksi,
-                'qty' => $request->qty[$index],
-                'kode_barang' => $no,
-                'tipe' => 'masuk'
+            // INSERT DATA TRANSAKSI BARANG MASUK
+            $transaksi = [
+                    'no_transaksi' => $nomor_transaksi,
+                    'tgl_transaksi' => $request->tgl_transaksi,
+                    'kode_supplier' => $request->supplier,
+                    'user_buat' => $request->user_buat,
+                    'user_ubah' => '',
+                    'keterangan' => $request->keterangan,
             ];
-            $index++;
-            $data = Itemtransaksi::create($data_item);
-        }
+            $datas = Barangmasuk::create($transaksi);
+                
+                
+                // INSERT DATA ITEM TRANSAKSI
+            $index = 0;
+            foreach($kode_b as $no){
+                $data_item = [
+                    'no_transaksi' => $nomor_transaksi,
+                    'kode_barang' => $no,
+                    'qty' => $request->qty[$index],
+                    'tipe' => 'masuk'
+                ];
+                $index++;
+                $data = Itemtransaksi::create($data_item);
+            }
 
-        return redirect()->back()->with('bmasukStore', 'Transaksi berhasil ditambah!');
+            return redirect()->back()->with('bmasukStore', 'Transaksi berhasil ditambah!');
+
+
+        });
 
     }
     
@@ -163,7 +167,7 @@ class BarangmasukController extends Controller
 
         if($request->ajax()){
 
-            $query = Barangmasuk::whereBetween('tgl_transaksi',[$tgl_dari,$tgl_sampai])->get();
+            $query = Barangmasuk::whereBetween('tgl_transaksi',[$tgl_dari,$tgl_sampai])->paginate(2);
             
             
             return response()->json(['data' => $query]);

@@ -33,6 +33,10 @@
         $('#table1').DataTable();
     });
 
+    $('#dateCari').change(function(){
+            console.log('Submiting form');                
+            $('#formCari').submit();
+    });
 
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
